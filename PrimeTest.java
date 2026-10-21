@@ -7,10 +7,10 @@ import java.util.Random;
 
 import java.math.BigInteger;
 
-public class Prime_Test {
+public class PrimeTest {
 
     
-    public static boolean Test(long n, int iteration){
+    public static boolean isProbablePrime(long n, int iteration){
 
         if (n < 2){
             return false;
@@ -68,7 +68,6 @@ public class Prime_Test {
         Scanner scan = new Scanner(System.in);
         System.out.println("Miller Rabin Primality Algorithm Test\n");
 
-        Prime_Test miller_rabin_test = new Prime_Test();
         System.out.println("Enter number\n");
 
         long num = scan.nextLong();
@@ -83,7 +82,7 @@ public class Prime_Test {
 
         
 
-        boolean prime = miller_rabin_test.Test(num, k);
+        boolean prime = isProbablePrime(num, k);
 
         if (prime)
 
