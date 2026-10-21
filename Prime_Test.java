@@ -12,7 +12,7 @@ public class Prime_Test {
     
     public static boolean Test(long n, int iteration){
 
-        if (n == 0 || n == 1){
+        if (n < 2){
             return false;
         }
         if (n == 2){
@@ -22,6 +22,9 @@ public class Prime_Test {
             return false;
         }
 
+        if (iteration < 1){
+            throw new IllegalArgumentException("iteration must be at least 1");
+        }
 
         long s = n -1;
         while (s % 2 == 0){
@@ -45,13 +48,16 @@ public class Prime_Test {
     }
 
 
-    public static long modPower(long a, long b, long c){
-        long res = 1;
-        for (int i = 0; i < b; i++){
-            res *= a;
-            res %= c;
+    public static long modPower(long base, long exp, long mod){
+        long result = 1;
+        base = Math.floorMod(base, mod);
+        while (exp > 0) { 
+            if ((exp & 1) == 1) result = mulMod(result, base, mod);
+            base = mulMod(base, base, mod);
+            exp >>= 1;
+
         }
-        return res % c;
+        return result;
     }
 
     public static long mulMod(long a, long b, long mod){
@@ -70,6 +76,12 @@ public class Prime_Test {
         System.out.println("\nEnter number of iterations");
 
         int k = scan.nextInt();
+        if (k < 1){
+            System.out.println("Number of iterations must be at least 1");
+            return;
+        }
+
+        
 
         boolean prime = miller_rabin_test.Test(num, k);
 
