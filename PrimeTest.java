@@ -9,13 +9,14 @@ import java.math.BigInteger;
 
 public class PrimeTest {
 
-    
+    private static final Random RAND = new Random();
+
     public static boolean isProbablePrime(long n, int iteration){
 
         if (n < 2){
             return false;
         }
-        if (n == 2){
+        if (n == 2 || n == 3){
             return true;
         }
         if (n % 2 == 0){
@@ -31,10 +32,8 @@ public class PrimeTest {
             s /= 2;
         }
 
-        Random rand = new Random();
         for (int i = 0; i < iteration; i++){
-            long r = Math.abs(rand.nextLong());
-            long a = r % (n - 1) + 1, temp = s;
+            long a = 2 + Math.floorMod(RAND.nextLong(), n - 3), temp = s;
             long mod = modPower(a, temp, n);
             while (temp != n - 1 && mod != 1 && mod != n -1){
                 mod = mulMod(mod, mod, n);
